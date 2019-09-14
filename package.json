@@ -10,6 +10,7 @@
     "node": "9"
   },
   "scripts": {
+    "start": "npx nodemon --exec npx babel-node server/bin/slack.js",
     "test": "jest",
     "build-server": "babel server --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
