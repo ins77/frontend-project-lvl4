@@ -1,14 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
-import renderApp from './components'
-
-// import faker from 'faker';
-// import gon from 'gon';
-// import cookies from 'js-cookie';
-// import io from 'socket.io-client';
+import renderApp from './index.jsx';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-renderApp(window.gon);
+renderApp(gon);
