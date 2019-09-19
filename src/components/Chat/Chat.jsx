@@ -3,9 +3,12 @@ import connect from '../../decorators/connect';
 import MessageForm from '../MessageForm';
 import cn from 'classnames';
 import UserContext from '../../UserContext';
+import { Row, Col } from 'react-bootstrap';
 
-const mapStateToProps = ({ messages }) => ({
-    messages: messages.allIds.map(id => messages.byId[id])
+const mapStateToProps = ({ messages, currentChannelId }) => ({
+  messages: messages.allIds
+    .map(id => messages.byId[id])
+    .filter(({ channelId }) => channelId === currentChannelId)
 });
 
 @connect(mapStateToProps)
@@ -16,29 +19,36 @@ export default class Chat extends Component {
     const { messages } = this.props;
   
     return (
-      <div className="d-flex flex-column" style={{minHeight: "90vh"}}>
-        <div className="row my-2">
-          <div className="col-12">
-            <ul className="list-unstyled">
+      <div className="d-flex flex-column" style={{height: "90vh"}}>
+        <Row className="mt-2 mb-5 b-scrollbar" style={{flexGrow: "1"}}>
+          <Col xs="12">
+            <div className="d-flex flex-column align-items-start">
               {
                 messages.map(({ id, message, userName }) => {
-                  const classes = cn({
-                    'text-right': userName === this.context,
-                    'text-primary': userName !== this.context,
+                  const messageType = userName === this.context ? 'own' : 'other';
+                  const classesMap = {
+                    own: 'bg-info text-white align-self-end',
+                    other: 'bg-light text-dark',
+                  };
+
+                  const classes = cn({ 
+                    [classesMap[messageType]]: true,
                     'mb-2': true,
+                    'p-3': true,
+                    'rounded': true,
                   });
 
-                  return <li key={id} className={classes}>{message}</li>;
+                  return <div key={id} className={classes}>{message}</div>;
                 })
               }
-            </ul>
-          </div>
-        </div>
-        <div className="row mb-2 mt-auto">
-          <div className="col-12">
+            </div>
+          </Col>
+        </Row>
+        <Row className="mt-auto">
+          <Col xs="12">
             <MessageForm/>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     );
   }

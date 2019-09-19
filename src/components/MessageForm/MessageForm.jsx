@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
 import UserContext from '../../UserContext';
-import cn from 'classnames';
+import { Form, Button } from 'react-bootstrap';
 
 const mapStateToProps = ({ currentChannelId }) => ({ currentChannelId });
 
@@ -34,10 +34,10 @@ export default class MessageForm extends Component {
     return (
       <>
         {error && <div className="text-danger mb-2">{error}</div>}
-        <form className="d-flex" onSubmit={handleSubmit(this.onSubmit)}>
+        <Form className="d-flex" onSubmit={handleSubmit(this.onSubmit)}>
           <Field name="message" component="textarea" className="form-control" style={{resize: "none"}}/>
-          <button className="btn btn-primary ml-2" type="submit" disabled={submitting || pristine}>Отправить</button>
-        </form>
+          <Button variant="primary" className="ml-2" type="submit" disabled={submitting || pristine}>Отправить</Button>
+        </Form>
       </>
     );
   }

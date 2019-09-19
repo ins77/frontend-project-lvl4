@@ -49,6 +49,8 @@ export default (gon) => {
     store.dispatch(actions.addMessageSuccess({ message: attributes }));
   });
 
+  console.log(gon);
+
   store.dispatch(actions.init({ ...gon }));
 
   return render(

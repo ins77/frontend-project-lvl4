@@ -10,6 +10,8 @@ export const addMessage = ({ channelId, message, userName }) => async (dispatch)
   await axios.post(url, { data: { attributes: { message, userName } } });
 };
 
+export const changeChannel = createAction('CHANNEL_CHANGE');
+
 // export const removeChannelRequest = createAction('CHANNEL_REMOVE_REQUEST');
 // export const removeChannelSuccess = createAction('CHANNEL_REMOVE_SUCCESS');
 // export const removeChannelFailure = createAction('CHANNEL_REMOVE_FAILURE');
