@@ -23,12 +23,10 @@ export default class Channels extends Component {
 
   onChannelEdit = (id, name) => (event) => {
     event.stopPropagation();
-    console.log(1);
   }
 
   onChannelRemove = (id) => (event) => {
     event.stopPropagation();
-    console.log(2);
   }
 
   render() {
@@ -36,23 +34,23 @@ export default class Channels extends Component {
 
     return (
       <ListGroup>
-        {channels.map(({ id, name }) => {
+        {channels.map(({ id, name, removable }) => {
           return (
             <ListGroup.Item action
                             variant="primary"
                             key={id}
-                            className="d-flex align-items-baseline"
+                            className="d-flex align-items-baseline text-truncate"
                             active={currentChannelId === id}
                             onClick={this.onChannelClick(id)}>
               {name}
-              <div className="ml-auto">
+              {removable && <div className="ml-auto">
                 <a className="py-1 px-2">
                   <FontAwesomeIcon icon={faEdit} onClick={this.onChannelEdit(id, name)}/>
                 </a>
                 <a className="py-1 px-2">
                   <FontAwesomeIcon icon={faTrashAlt} onClick={this.onChannelRemove(id)}/>
                 </a>
-              </div>
+              </div>}
             </ListGroup.Item>
           );
         })}

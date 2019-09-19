@@ -25,7 +25,8 @@ export default class Chat extends Component {
             <div className="d-flex flex-column align-items-start">
               {
                 messages.map(({ id, message, userName }) => {
-                  const messageType = userName === this.context ? 'own' : 'other';
+                  const isMe = userName === this.context;
+                  const messageType = isMe ? 'own' : 'other';
                   const classesMap = {
                     own: 'bg-info text-white align-self-end',
                     other: 'bg-light text-dark',
@@ -38,7 +39,12 @@ export default class Chat extends Component {
                     'rounded': true,
                   });
 
-                  return <div key={id} className={classes}>{message}</div>;
+                  return (
+                    <div key={id} className={classes}>
+                      {!isMe && <h6>{userName}:</h6>}
+                      {message}
+                    </div>
+                  );
                 })
               }
             </div>
