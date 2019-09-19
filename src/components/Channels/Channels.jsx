@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserContext from '../../UserContext';
+import EntityContext from '../../EntityContext';
 import connect from '../../decorators/connect';
 import { ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,7 @@ const mapStateToProps = ({ channels, currentChannelId }) => (
 
 @connect(mapStateToProps)
 export default class Channels extends Component {
-  static contextType = UserContext;
+  static contextType = EntityContext;
 
   onChannelClick = (id) => () => {
     const { changeChannel } = this.props;

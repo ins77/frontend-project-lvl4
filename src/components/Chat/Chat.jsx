@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import connect from '../../decorators/connect';
 import MessageForm from '../MessageForm';
 import cn from 'classnames';
-import UserContext from '../../UserContext';
+import EntityContext from '../../EntityContext';
 import { Row, Col } from 'react-bootstrap';
 
 const mapStateToProps = ({ messages, currentChannelId }) => ({
@@ -13,7 +13,7 @@ const mapStateToProps = ({ messages, currentChannelId }) => ({
 
 @connect(mapStateToProps)
 export default class Chat extends Component {
-  static contextType = UserContext;
+  static contextType = EntityContext;
 
   render() {
     const { messages } = this.props;
@@ -25,7 +25,7 @@ export default class Chat extends Component {
             <div className="d-flex flex-column align-items-start">
               {
                 messages.map(({ id, message, userName }) => {
-                  const isMe = userName === this.context;
+                  const isMe = userName === this.context.userName;
                   const messageType = isMe ? 'own' : 'other';
                   const classesMap = {
                     own: 'bg-info text-white align-self-end',

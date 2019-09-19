@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
-import UserContext from '../../UserContext';
+import EntityContext from '../../EntityContext';
 import { Form, Button } from 'react-bootstrap';
 
 const mapStateToProps = ({ currentChannelId }) => ({ currentChannelId });
@@ -9,13 +9,14 @@ const mapStateToProps = ({ currentChannelId }) => ({ currentChannelId });
 @connect(mapStateToProps)
 @reduxForm('sendMessage')
 export default class MessageForm extends Component {
-  static contextType = UserContext;
+  static contextType = EntityContext;
 
   onSubmit = async (values) => {
     const { addMessage, currentChannelId, reset } = this.props;
+    const { userName } = this.context;
     const message = {
       channelId: currentChannelId,
-      userName: this.context,
+      userName,
       ...values, 
     };
 

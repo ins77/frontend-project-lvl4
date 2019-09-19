@@ -1,6 +1,5 @@
 import '@babel/polyfill';
 import faker from 'faker';
-import gon from 'gon';
 import cookies from 'js-cookie';
 import io from 'socket.io-client';
 import React from 'react';
@@ -11,7 +10,7 @@ import thunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 import * as actions from './actions';
-import UserContext from './UserContext';
+import EntityContext from './EntityContext';
 
 // TODO: бейджики
 export default (gon) => {
@@ -31,6 +30,7 @@ export default (gon) => {
   }
 
   const userName = cookies.get('userName');
+  const contextValue = { userName };
 
   // TODO: использовать вебсокеты
   // socket.on('newChannel', (channels) => {
@@ -49,15 +49,13 @@ export default (gon) => {
     store.dispatch(actions.addMessageSuccess({ message: attributes }));
   });
 
-  console.log(gon);
-
   store.dispatch(actions.init({ ...gon }));
 
   return render(
     <Provider store={store}>
-      <UserContext.Provider value={userName}>
+      <EntityContext.Provider value={contextValue}>
         <App/>
-      </UserContext.Provider>
+      </EntityContext.Provider>
     </Provider>,
     document.getElementById('chat')
   );
