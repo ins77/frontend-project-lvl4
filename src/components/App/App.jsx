@@ -22,12 +22,11 @@ export default class App extends Component {
 
     return (
       <Row className="my-4">
-        <Col xs="4" className="d-flex flex-column" style={{height: "90vh"}}>
+        <Col xs="4" className="d-flex flex-column b-app-height">
           <h6 className="mb-4 mt-2">
             Пользователь: {userName}
           </h6>
-          <a className="d-inline-flex mb-4 text-info align-items-center" 
-             style={{cursor: "pointer"}} 
+          <a className="d-inline-flex mb-4 text-info align-items-center b-cursor-pointer"
              onClick={this.onChannelCreate}>
             <FontAwesomeIcon icon={faPlusCircle} className="mr-1"/> Создать новый канал
           </a>
@@ -35,7 +34,7 @@ export default class App extends Component {
             <Channels/>
           </div>
         </Col>
-        <Col xs="8">
+        <Col xs="8" className="d-flex flex-column b-app-height">
           <Chat/>
         </Col>
       </Row>

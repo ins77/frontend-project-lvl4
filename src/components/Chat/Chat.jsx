@@ -19,10 +19,10 @@ export default class Chat extends Component {
     const { messages } = this.props;
   
     return (
-      <div className="d-flex flex-column" style={{height: "90vh"}}>
-        <Row className="mt-2 mb-5 b-scrollbar">
-          <Col xs="12">
-            <div className="d-flex flex-column align-items-start">
+      <div className="d-flex flex-column b-flex-grow b-overflow-hidden">
+        <Row className="mt-2 mb-5 flex-column b-flex-grow b-overflow-hidden">
+          <Col xs="12" className="d-flex" style={{overflow: "hidden"}}>
+            <div className="d-flex flex-column align-items-start b-flex-grow b-scrollbar">
               {
                 messages.map(({ id, message, userName }) => {
                   const isMe = userName === this.context.userName;
@@ -35,6 +35,7 @@ export default class Chat extends Component {
                   const classes = cn({ 
                     [classesMap[messageType]]: true,
                     'mb-2': true,
+                    'mx-2': true,
                     'p-3': true,
                     'rounded': true,
                   });
