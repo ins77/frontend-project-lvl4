@@ -11,6 +11,7 @@ import App from './components/App';
 import reducers from './reducers';
 import * as actions from './actions';
 import EntityContext from './EntityContext';
+import ChannelCreateModal from './components/ChannelCreateModal';
 
 // TODO: бейджики
 export default (gon) => {
@@ -32,20 +33,19 @@ export default (gon) => {
   const userName = cookies.get('userName');
   const contextValue = { userName };
 
-  // TODO: использовать вебсокеты
-  // socket.on('newChannel', (channels) => {
-  //   console.log('newChannel');
-  // });
+  socket.on('newChannel', ({ data: { attributes } }) => {
+    store.dispatch(actions.addChannelSuccess({ channel: attributes }));
+  });
 
-  // socket.on('removeChannel', (channels) => {
-  //   console.log('removeChannel');
-  // });
+  socket.on('removeChannel', ({ data: { attributes } }) => {
+    console.log('removeChannel');
+  });
 
-  // socket.on('renameChannel', (channels) => {
-  //   console.log('renameChannel');
-  // });
+  socket.on('renameChannel', ({ data: { attributes } }) => {
+    console.log('renameChannel');
+  });
 
-  socket.on('newMessage', ({ data: { attributes } } ) => {
+  socket.on('newMessage', ({ data: { attributes } }) => {
     store.dispatch(actions.addMessageSuccess({ message: attributes }));
   });
 
@@ -55,6 +55,7 @@ export default (gon) => {
     <Provider store={store}>
       <EntityContext.Provider value={contextValue}>
         <App/>
+        <ChannelCreateModal/>
       </EntityContext.Provider>
     </Provider>,
     document.getElementById('chat')

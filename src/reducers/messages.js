@@ -11,11 +11,8 @@ export default handleActions({
   },
   [actions.addMessageSuccess](state, { payload: { message } }) {
     return {
-      byId: {...state.byId, [message.id]: { ...message } },
+      byId: { ...state.byId, [message.id]: { ...message } },
       allIds: [...state.allIds, message.id],
     };
   },
-  // [actions.removeChannelSuccess](state, { payload: { channel } }) {
-  //   return state;
-  // },
 }, { byId: {}, allIds: [] });

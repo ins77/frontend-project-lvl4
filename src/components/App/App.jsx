@@ -5,12 +5,16 @@ import EntityContext from '../../EntityContext';
 import { Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { connect } from '../../decorators';
 
+@connect(() => ({}))
 export default class App extends Component {
   static contextType = EntityContext;
 
   onChannelCreate = () => {
-    console.log('onChannelCreate');
+    const { showChannelCreateModal } = this.props;
+
+    showChannelCreateModal(true);
   }
 
   render() {
@@ -18,7 +22,7 @@ export default class App extends Component {
 
     return (
       <Row className="my-4">
-        <Col xs="4">
+        <Col xs="4" className="d-flex flex-column" style={{height: "90vh"}}>
           <h6 className="mb-4 mt-2">
             Пользователь: {userName}
           </h6>
@@ -27,7 +31,9 @@ export default class App extends Component {
              onClick={this.onChannelCreate}>
             <FontAwesomeIcon icon={faPlusCircle} className="mr-1"/> Создать новый канал
           </a>
-          <Channels/>
+          <div className="b-scrollbar">
+            <Channels/>
+          </div>
         </Col>
         <Col xs="8">
           <Chat/>

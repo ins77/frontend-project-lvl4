@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import { handleActions } from 'redux-actions';
 import channels from './channels';
 import messages from './messages';
 import currentChannelId from './currentChannelId';
+import * as actions from '../actions';
 
 // const channelRemovingState = handleActions({
 //   [actions.removeChannelRequest]() {
@@ -17,10 +19,30 @@ import currentChannelId from './currentChannelId';
 //   },
 // }, 'none');
 
+const channelCreateModal = handleActions({
+  [actions.showChannelCreateModal](state, { payload }) {
+    return payload;
+  },
+}, false);
+
+const channelRemoveModal = handleActions({
+  [actions.showChannelRemoveModal](state, { payload }) {
+    return payload;
+  },
+}, false);
+
+const channelRenameModal = handleActions({
+  [actions.showChannelRenameModal](state, { payload }) {
+    return payload;
+  },
+}, false);
+
 export default combineReducers({
-  // channelRemovingState,
   currentChannelId,
   channels,
   messages,
+  channelCreateModal,
+  channelRemoveModal,
+  channelRenameModal,
   form: formReducer,
 });

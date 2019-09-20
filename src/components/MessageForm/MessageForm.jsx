@@ -22,7 +22,7 @@ export default class MessageForm extends Component {
 
     try {
       await addMessage(message);
-    } catch (e) {
+    } catch(e) {
       throw new SubmissionError({ _error: e.message });
     }
 

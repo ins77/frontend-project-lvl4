@@ -20,7 +20,7 @@ export default class Chat extends Component {
   
     return (
       <div className="d-flex flex-column" style={{height: "90vh"}}>
-        <Row className="mt-2 mb-5 b-scrollbar" style={{flexGrow: "1"}}>
+        <Row className="mt-2 mb-5 b-scrollbar">
           <Col xs="12">
             <div className="d-flex flex-column align-items-start">
               {
