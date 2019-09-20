@@ -4,13 +4,13 @@ import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
 
 const mapStateToProps = ({ channelRenameModal, channels }) => ({
-  channelRenameModal, 
+  channelRenameModal,
   channels: channels.allIds.map(id => channels.byId[id]),
 });
 
 @connect(mapStateToProps)
 @reduxForm('channelRenameForm')
-export default class ChannelRenameModal extends Component {
+class ChannelRenameModal extends Component {
   onModalClose = (id, name) => () => {
     const { showChannelRenameModal } = this.props;
 
@@ -19,7 +19,6 @@ export default class ChannelRenameModal extends Component {
 
   onSubmit = (id, name) => async (values) => {
     const { renameChannel, reset, channels } = this.props;
-
     const hasName = channels.some(val => val.name === values.name);
 
     if (hasName) {
@@ -27,17 +26,23 @@ export default class ChannelRenameModal extends Component {
     }
 
     try {
-      await renameChannel({ id, ...values  });
-    } catch(e) {
+      await renameChannel({ id, ...values });
+    } catch (e) {
       throw new SubmissionError({ _error: e.message });
     }
-    
+
     this.onModalClose(id, name)();
     reset();
   }
 
   render() {
-    const { channelRenameModal, handleSubmit, submitting, error, pristine } = this.props;
+    const {
+      channelRenameModal,
+      handleSubmit,
+      submitting,
+      error,
+      pristine,
+    } = this.props;
     const { id, name, show } = channelRenameModal;
 
     return (
@@ -48,7 +53,7 @@ export default class ChannelRenameModal extends Component {
         <Form onSubmit={handleSubmit(this.onSubmit(id, name))}>
           <Modal.Body>
             <label className="d-flex flex-column">
-              <div className="mb-2">Введите новое название канала "{name}"</div>
+              <div className="mb-2">Введите новое название канала &ldquo;{name}&rdquo;</div>
               <Field name="name" className="form-control" component="input" required/>
               {error && <div className="text-danger mt-2">{error}</div>}
             </label>
@@ -57,7 +62,7 @@ export default class ChannelRenameModal extends Component {
             <Button variant="secondary" onClick={this.onModalClose(id, name)}>
               Отменить
             </Button>
-            <Button variant="primary" 
+            <Button variant="primary"
                     type="submit"
                     disabled={submitting || pristine}>
               Переименовать
@@ -67,4 +72,6 @@ export default class ChannelRenameModal extends Component {
       </Modal>
     );
   }
-};
+}
+
+export default ChannelRenameModal;

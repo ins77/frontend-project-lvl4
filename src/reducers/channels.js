@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import _ from 'lodash';
 import * as actions from '../actions';
 
 export default handleActions({
@@ -21,7 +22,6 @@ export default handleActions({
     };
   },
   [actions.renameChannelSuccess](state, { payload: { id, name } }) {
-    console.log(id, name);
     return {
       byId: { ...state.byId, [id]: { ...state.byId[id], name } },
       allIds: state.allIds,

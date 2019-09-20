@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { connect, reduxForm } from '../../decorators';
 
 const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
-  { 
+  {
     channel: channelRemoveModal,
     channelRemovingState,
   }
@@ -11,7 +11,7 @@ const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
 
 @connect(mapStateToProps)
 @reduxForm('channelRemoveForm')
-export default class ChannelRemoveModal extends Component {
+class ChannelRemoveModal extends Component {
   onModalClose = (id, name) => () => {
     const { showChannelRemoveModal } = this.props;
 
@@ -37,15 +37,15 @@ export default class ChannelRemoveModal extends Component {
           <Modal.Title>Удаление канала</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Вы точно хотите удалить канал "{name}"?
+          Вы точно хотите удалить канал &ldquo;{name}&rdquo;?
           {isRemovingFailed && <div className="text-alert mt-2">Произошла ошибка. Попробуйте еще раз.</div>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.onModalClose(id, name)}>
             Нет
           </Button>
-          <Button variant="primary" 
-                  onClick={this.onButtonConfirmClick(id, name)} 
+          <Button variant="primary"
+                  onClick={this.onButtonConfirmClick(id, name)}
                   type="submit"
                   disabled={isRemovingRequested}>
             Да
@@ -54,4 +54,6 @@ export default class ChannelRemoveModal extends Component {
       </Modal>
     );
   }
-};
+}
+
+export default ChannelRemoveModal;

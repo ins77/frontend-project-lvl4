@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Chat from '../Chat';
-import Channels from '../Channels';
-import EntityContext from '../../EntityContext';
 import { Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import Chat from '../Chat';
+import Channels from '../Channels';
+import EntityContext from '../../EntityContext';
 import { connect } from '../../decorators';
 
 @connect(() => ({}))
-export default class App extends Component {
+class App extends Component {
   static contextType = EntityContext;
 
   onChannelCreate = () => {
@@ -40,4 +40,6 @@ export default class App extends Component {
       </Row>
     );
   }
-};
+}
+
+export default App;

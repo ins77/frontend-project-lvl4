@@ -35,7 +35,7 @@ export const removeChannel = ({ id }) => async (dispatch) => {
     const url = routes.channelPath(id);
     await axios.delete(url);
     dispatch(removeChannelSuccess({ id }));
-  } catch(e) {
+  } catch (e) {
     dispatch(removeChannelFailure());
     throw e;
   }

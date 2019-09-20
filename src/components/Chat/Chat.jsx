@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import cn from 'classnames';
 import connect from '../../decorators/connect';
 import MessageForm from '../MessageForm';
-import cn from 'classnames';
 import EntityContext from '../../EntityContext';
-import { Row, Col } from 'react-bootstrap';
+
 
 const mapStateToProps = ({ messages, currentChannelId }) => ({
   messages: messages.allIds
     .map(id => messages.byId[id])
-    .filter(({ channelId }) => channelId === currentChannelId)
+    .filter(({ channelId }) => channelId === currentChannelId),
 });
 
 @connect(mapStateToProps)
-export default class Chat extends Component {
+class Chat extends Component {
   static contextType = EntityContext;
 
   render() {
     const { messages } = this.props;
-  
+
     return (
       <div className="d-flex flex-column b-flex-grow b-overflow-hidden">
         <Row className="mt-2 mb-4 flex-column b-flex-grow b-overflow-hidden">
-          <Col xs="12" className="d-flex" style={{overflow: "hidden"}}>
+          <Col xs="12" className="d-flex b-overflow-hidden">
             <div className="d-flex flex-column align-items-start b-flex-grow b-scrollbar">
               {
                 messages.map(({ id, message, userName }) => {
@@ -32,12 +33,9 @@ export default class Chat extends Component {
                     other: 'bg-light text-dark',
                   };
 
-                  const classes = cn({ 
+                  const classes = cn({
                     [classesMap[messageType]]: true,
-                    'mb-2': true,
-                    'mx-2': true,
-                    'p-3': true,
-                    'rounded': true,
+                    'mb-2 mx-2 p-3 rounded': true,
                   });
 
                   return (
@@ -59,4 +57,6 @@ export default class Chat extends Component {
       </div>
     );
   }
-};
+}
+
+export default Chat;

@@ -7,5 +7,5 @@ export default handleActions({
   },
   [actions.changeChannel](state, { payload: { currentChannelId } }) {
     return currentChannelId;
-  }
+  },
 }, 1);

@@ -4,13 +4,13 @@ import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
 
 const mapStateToProps = ({ channelCreateModal, channels }) => ({
-  show: channelCreateModal, 
+  show: channelCreateModal,
   channels: channels.allIds.map(id => channels.byId[id]),
 });
 
 @connect(mapStateToProps)
 @reduxForm('channelCreateForm')
-export default class ChannelCreateModal extends Component {
+class ChannelCreateModal extends Component {
   onModalClose = () => {
     const { showChannelCreateModal } = this.props;
 
@@ -26,8 +26,8 @@ export default class ChannelCreateModal extends Component {
     }
 
     try {
-      await addChannel({ ...values  });
-    } catch(e) {
+      await addChannel({ ...values });
+    } catch (e) {
       throw new SubmissionError({ _error: e.message });
     }
 
@@ -36,7 +36,13 @@ export default class ChannelCreateModal extends Component {
   }
 
   render() {
-    const { show, handleSubmit, submitting, error, pristine } = this.props;
+    const {
+      show,
+      handleSubmit,
+      submitting,
+      error,
+      pristine,
+    } = this.props;
 
     return (
       <Modal show={show} onHide={this.onModalClose}>
@@ -55,7 +61,7 @@ export default class ChannelCreateModal extends Component {
             <Button variant="secondary" onClick={this.onModalClose}>
               Отменить
             </Button>
-            <Button variant="primary" 
+            <Button variant="primary"
                     type="submit"
                     disabled={submitting || pristine}>
               Создать
@@ -65,4 +71,6 @@ export default class ChannelCreateModal extends Component {
       </Modal>
     );
   }
-};
+}
+
+export default ChannelCreateModal;
