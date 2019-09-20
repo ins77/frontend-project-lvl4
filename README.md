@@ -4,4 +4,4 @@
 [![Build Status](https://travis-ci.org/ins77/frontend-project-lvl4.svg?branch=master)](https://travis-ci.org/ins77/frontend-project-lvl4)
 
 # Демо версия
-http://hexlet-ins-rss.surge.sh/
+https://enigmatic-stream-57647.herokuapp.com/
