@@ -44,3 +44,7 @@
 button:focus {
 	outline: none;
 }
+
+#container {
+	height: 100vh;
+}
