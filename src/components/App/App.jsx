@@ -21,7 +21,7 @@ export default class App extends Component {
     const { userName } = this.context;
 
     return (
-      <Row className="my-4">
+      <Row>
         <Col xs="4" className="d-flex flex-column b-app-height">
           <h6 className="mb-4 mt-2">
             Пользователь: {userName}
