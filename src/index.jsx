@@ -14,6 +14,8 @@ import EntityContext from './EntityContext';
 import ChannelCreateModal from './components/ChannelCreateModal';
 import ChannelRemoveModal from './components/ChannelRemoveModal';
 import ChannelRenameModal from './components/ChannelRenameModal';
+import routes from './routes';
+import axios from 'axios';
 
 // TODO: бейджики
 export default (gon) => {
