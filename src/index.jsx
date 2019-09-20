@@ -40,6 +40,7 @@ export default (gon) => {
 
   socket.on('removeChannel', ({ data: { id } }) => {
     store.dispatch(actions.removeChannelSuccess({ id }));
+    store.dispatch(actions.changeChannel({ currentChannelId: 1 }));
   });
 
   socket.on('renameChannel', ({ data: { attributes } }) => {
