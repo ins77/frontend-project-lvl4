@@ -32,8 +32,8 @@ const channelRemoveModal = handleActions({
 }, false);
 
 const channelRenameModal = handleActions({
-  [actions.showChannelRenameModal](state, { payload }) {
-    return payload;
+  [actions.showChannelRenameModal](state, { payload: { id, name, show } }) {
+    return { id, name, show };
   },
 }, false);
 

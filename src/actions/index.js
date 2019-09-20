@@ -24,6 +24,11 @@ export const addChannel = ({ name }) => async () => {
   await axios.post(url, { data: { attributes: { name } } });
 };
 
+export const renameChannel = ({ id, name }) => async () => {
+  const url = routes.channelPath(id);
+  await axios.patch(url, { data: { attributes: { name } } });
+};
+
 export const removeChannel = ({ id }) => async (dispatch) => {
   dispatch(removeChannelRequest());
   try {

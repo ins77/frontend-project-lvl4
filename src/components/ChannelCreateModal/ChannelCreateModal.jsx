@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { Form, Field } from 'redux-form';
+import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
 
-const mapStateToProps = ({ channelCreateModal }) => ({ show: channelCreateModal });
+const mapStateToProps = ({ channelCreateModal, channels }) => ({ show: channelCreateModal, channels });
 
 @connect(mapStateToProps)
 @reduxForm('channelCreateForm')
@@ -15,7 +15,12 @@ export default class ChannelCreateModal extends Component {
   }
 
   onSubmit = async (values) => {
-    const { addChannel, reset } = this.props;
+    const { addChannel, reset, channels } = this.props;
+    const hasName = Object.values(channels.byId).some(val => val.name === values.name);
+
+    if (hasName) {
+      throw new SubmissionError({ _error: 'Такое название канала уже существует' });
+    }
 
     try {
       await addChannel({ ...values  });
@@ -23,6 +28,7 @@ export default class ChannelCreateModal extends Component {
       throw new SubmissionError({ _error: e.message });
     }
 
+    this.onModalClose();
     reset();
   }
 
@@ -47,7 +53,6 @@ export default class ChannelCreateModal extends Component {
               Отменить
             </Button>
             <Button variant="primary" 
-                    onClick={this.onModalClose} 
                     type="submit"
                     disabled={submitting || pristine}>
               Создать

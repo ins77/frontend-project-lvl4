@@ -20,7 +20,7 @@ export default class Chat extends Component {
   
     return (
       <div className="d-flex flex-column b-flex-grow b-overflow-hidden">
-        <Row className="mt-2 mb-5 flex-column b-flex-grow b-overflow-hidden">
+        <Row className="mt-2 mb-4 flex-column b-flex-grow b-overflow-hidden">
           <Col xs="12" className="d-flex" style={{overflow: "hidden"}}>
             <div className="d-flex flex-column align-items-start b-flex-grow b-scrollbar">
               {

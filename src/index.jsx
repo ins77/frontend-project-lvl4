@@ -13,6 +13,7 @@ import * as actions from './actions';
 import EntityContext from './EntityContext';
 import ChannelCreateModal from './components/ChannelCreateModal';
 import ChannelRemoveModal from './components/ChannelRemoveModal';
+import ChannelRenameModal from './components/ChannelRenameModal';
 
 // TODO: бейджики
 export default (gon) => {
@@ -44,7 +45,9 @@ export default (gon) => {
   });
 
   socket.on('renameChannel', ({ data: { attributes } }) => {
-    console.log('renameChannel');
+    const { id, name } = attributes;
+
+    store.dispatch(actions.renameChannelSuccess({ id, name }));
   });
 
   socket.on('newMessage', ({ data: { attributes } }) => {
@@ -59,6 +62,7 @@ export default (gon) => {
         <App/>
         <ChannelCreateModal/>
         <ChannelRemoveModal/>
+        <ChannelRenameModal/>
       </EntityContext.Provider>
     </Provider>,
     document.getElementById('chat')

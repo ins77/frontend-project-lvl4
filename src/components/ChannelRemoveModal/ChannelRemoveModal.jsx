@@ -12,7 +12,7 @@ const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
 @connect(mapStateToProps)
 @reduxForm('channelRemoveForm')
 export default class ChannelRemoveModal extends Component {
-  onModalClose = (id, name) => {
+  onModalClose = (id, name) => () => {
     const { showChannelRemoveModal } = this.props;
 
     showChannelRemoveModal({ id, name, show: false });
@@ -23,7 +23,7 @@ export default class ChannelRemoveModal extends Component {
 
     await removeChannel({ id });
     changeChannel({ currentChannelId: 1 });
-    this.onModalClose(id, name);
+    this.onModalClose(id, name)();
   }
 
   render() {
@@ -32,7 +32,7 @@ export default class ChannelRemoveModal extends Component {
     const isRemovingRequested = channelRemovingState === 'requested';
 
     return (
-      <Modal show={show} onHide={this.onModalClose}>
+      <Modal show={show} onHide={this.onModalClose(id, name)}>
         <Modal.Header closeButton>
           <Modal.Title>Удаление канала</Modal.Title>
         </Modal.Header>
@@ -41,7 +41,7 @@ export default class ChannelRemoveModal extends Component {
           {isRemovingFailed && <div className="text-alert mt-2">Произошла ошибка. Попробуйте еще раз.</div>}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.onModalClose}>
+          <Button variant="secondary" onClick={this.onModalClose(id, name)}>
             Нет
           </Button>
           <Button variant="primary" 

@@ -23,6 +23,10 @@ export default class Channels extends Component {
 
   onChannelEdit = (id, name) => (event) => {
     event.stopPropagation();
+
+    const { showChannelRenameModal } = this.props;
+
+    showChannelRenameModal({ id, name, show: true });
   }
 
   onChannelRemove = ({ id, name }) => (event) => {
