@@ -17,7 +17,10 @@ export default handleActions({
     };
   },
   [actions.removeChannelSuccess](state, { payload: { id } }) {
-    return state;
+    return {
+      byId: _.omit(state.byId, id),
+      allIds: state.allIds.filter(currentId => currentId !== id),
+    };
   },
   [actions.renameChannelSuccess](state, { payload: { channel } }) {
     return state;

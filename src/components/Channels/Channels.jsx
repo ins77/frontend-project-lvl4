@@ -25,8 +25,12 @@ export default class Channels extends Component {
     event.stopPropagation();
   }
 
-  onChannelRemove = (id) => (event) => {
+  onChannelRemove = ({ id, name }) => (event) => {
     event.stopPropagation();
+
+    const { showChannelRemoveModal } = this.props;
+
+    showChannelRemoveModal({ id, name, show: true });
   }
 
   render() {
@@ -48,7 +52,7 @@ export default class Channels extends Component {
                   <FontAwesomeIcon icon={faEdit} onClick={this.onChannelEdit(id, name)}/>
                 </a>
                 <a className="py-1 px-2">
-                  <FontAwesomeIcon icon={faTrashAlt} onClick={this.onChannelRemove(id)}/>
+                  <FontAwesomeIcon icon={faTrashAlt} onClick={this.onChannelRemove({ id, name })}/>
                 </a>
               </div>}
             </ListGroup.Item>

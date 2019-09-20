@@ -12,6 +12,7 @@ import reducers from './reducers';
 import * as actions from './actions';
 import EntityContext from './EntityContext';
 import ChannelCreateModal from './components/ChannelCreateModal';
+import ChannelRemoveModal from './components/ChannelRemoveModal';
 
 // TODO: бейджики
 export default (gon) => {
@@ -37,8 +38,8 @@ export default (gon) => {
     store.dispatch(actions.addChannelSuccess({ channel: attributes }));
   });
 
-  socket.on('removeChannel', ({ data: { attributes } }) => {
-    console.log('removeChannel');
+  socket.on('removeChannel', ({ data: { id } }) => {
+    store.dispatch(actions.removeChannelSuccess({ id }));
   });
 
   socket.on('renameChannel', ({ data: { attributes } }) => {
@@ -56,6 +57,7 @@ export default (gon) => {
       <EntityContext.Provider value={contextValue}>
         <App/>
         <ChannelCreateModal/>
+        <ChannelRemoveModal/>
       </EntityContext.Provider>
     </Provider>,
     document.getElementById('chat')

@@ -7,17 +7,17 @@ import messages from './messages';
 import currentChannelId from './currentChannelId';
 import * as actions from '../actions';
 
-// const channelRemovingState = handleActions({
-//   [actions.removeChannelRequest]() {
-//     return 'requested';
-//   },
-//   [actions.removeChannelFailure]() {
-//     return 'failed';
-//   },
-//   [actions.removeChannelSuccess]() {
-//     return 'finished';
-//   },
-// }, 'none');
+const channelRemovingState = handleActions({
+  [actions.removeChannelRequest]() {
+    return 'requested';
+  },
+  [actions.removeChannelFailure]() {
+    return 'failed';
+  },
+  [actions.removeChannelSuccess]() {
+    return 'finished';
+  },
+}, 'none');
 
 const channelCreateModal = handleActions({
   [actions.showChannelCreateModal](state, { payload }) {
@@ -26,8 +26,8 @@ const channelCreateModal = handleActions({
 }, false);
 
 const channelRemoveModal = handleActions({
-  [actions.showChannelRemoveModal](state, { payload }) {
-    return payload;
+  [actions.showChannelRemoveModal](state, { payload: { id, name, show } }) {
+    return { id, name, show };
   },
 }, false);
 
@@ -38,6 +38,7 @@ const channelRenameModal = handleActions({
 }, false);
 
 export default combineReducers({
+  channelRemovingState,
   currentChannelId,
   channels,
   messages,
