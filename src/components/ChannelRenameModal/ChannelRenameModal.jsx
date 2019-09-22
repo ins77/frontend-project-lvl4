@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
+import Validators from '../../common/Validators';
 
 const mapStateToProps = ({ channelRenameModal, channels }) => ({
   channelRenameModal,
@@ -19,9 +20,8 @@ class ChannelRenameModal extends Component {
 
   onSubmit = (id, name) => async (values) => {
     const { renameChannel, reset, channels } = this.props;
-    const hasName = channels.some(val => val.name === values.name);
 
-    if (hasName) {
+    if (Validators.isChannelNameValid(channels, values.name)) {
       throw new SubmissionError({ _error: 'Такое название канала уже существует' });
     }
 

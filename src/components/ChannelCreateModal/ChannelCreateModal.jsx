@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../../decorators';
+import Validators from '../../common/Validators';
 
 const mapStateToProps = ({ channelCreateModal, channels }) => ({
   show: channelCreateModal,
@@ -19,9 +20,8 @@ class ChannelCreateModal extends Component {
 
   onSubmit = async (values) => {
     const { addChannel, reset, channels } = this.props;
-    const hasName = channels.some(val => val.name === values.name);
 
-    if (hasName) {
+    if (Validators.isChannelNameValid(channels, values.name)) {
       throw new SubmissionError({ _error: 'Такое название канала уже существует' });
     }
 
@@ -54,7 +54,7 @@ class ChannelCreateModal extends Component {
             <label className="d-flex flex-column">
               <div className="mb-2">Введите название нового канала</div>
               <Field name="name" className="form-control" component="input" required/>
-              {error && <div className="text-danger mb-2">{error}</div>}
+              {error && <div className="text-danger mt-2">{error}</div>}
             </label>
           </Modal.Body>
           <Modal.Footer>
