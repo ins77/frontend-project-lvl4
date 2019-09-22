@@ -45,6 +45,11 @@ button:focus {
 	outline: none;
 }
 
+textarea {
+	outline: none;
+	box-shadow: none;
+}
+
 #container {
 	height: 100vh;
 }
