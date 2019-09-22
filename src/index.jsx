@@ -17,14 +17,11 @@ import ChannelRenameModal from './components/ChannelRenameModal';
 
 export default (gon) => {
   const socket = io();
-  const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-  const devToolMiddleware = ext && ext();
+  const middleware = applyMiddleware(thunk);
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     reducers,
-    compose(
-      applyMiddleware(thunk),
-      devToolMiddleware,
-    ),
+    composeEnhancers(middleware),
   );
 
   if (!cookies.get('userName')) {
