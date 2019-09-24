@@ -4,7 +4,6 @@ import routes from '../routes';
 
 export const init = createAction('INIT');
 export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
-export const removeChannelMessages = createAction('CHANNEL_MESSAGES_REMOVE');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
 export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
 export const removeChannelRequest = createAction('CHANNEL_REMOVE_REQUEST');
@@ -36,7 +35,6 @@ export const removeChannel = ({ id }) => async (dispatch) => {
     const url = routes.channelPath(id);
     await axios.delete(url);
     dispatch(removeChannelSuccess({ id }));
-    dispatch(removeChannelMessages({ id }));
   } catch (e) {
     dispatch(removeChannelFailure());
     throw e;

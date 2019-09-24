@@ -15,7 +15,7 @@ export default handleActions({
       allIds: [...state.allIds, message.id],
     };
   },
-  [actions.removeChannelMessages](state, { payload: { id } }) {
+  [actions.removeChannelSuccess](state, { payload: { id } }) {
     const messagesToRemove = _.pickBy(state.byId, ({ channelId }) => channelId === id);
     const idsToRemove = Object.values(messagesToRemove).map(message => message.id);
 
