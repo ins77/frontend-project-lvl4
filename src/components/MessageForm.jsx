@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, SubmissionError } from 'redux-form';
 import { Form, Button } from 'react-bootstrap';
-import { connect, reduxForm } from '../../decorators';
-import EntityContext from '../../EntityContext';
+import { connect, reduxForm } from '../decorators';
+import EntityContext from '../EntityContext';
 
 const mapStateToProps = ({ currentChannelId }) => ({ currentChannelId });
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Form, Field, SubmissionError } from 'redux-form';
-import { connect, reduxForm } from '../../decorators';
-import Validators from '../../common/Validators';
+import { connect, reduxForm } from '../decorators';
+import Validators from '../common/Validators';
 
 const mapStateToProps = ({ channelRenameModal, channels }) => ({
   channelRenameModal,

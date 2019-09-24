@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { connect, reduxForm } from '../../decorators';
+import { connect, reduxForm } from '../decorators';
 
 const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
   {

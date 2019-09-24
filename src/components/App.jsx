@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import Chat from '../Chat';
-import Channels from '../Channels';
-import EntityContext from '../../EntityContext';
-import { connect } from '../../decorators';
+import Chat from './Chat';
+import Channels from './Channels';
+import EntityContext from '../EntityContext';
+import { connect } from '../decorators';
 
 @connect(() => ({}))
 class App extends Component {
@@ -21,20 +21,20 @@ class App extends Component {
     const { userName } = this.context;
 
     return (
-      <Row>
-        <Col xs="4" className="d-flex flex-column b-app-height">
+      <Row className="vh-100 py-4">
+        <Col xs="4" className="d-flex flex-column h-100">
           <h6 className="mb-4 mt-2">
             Пользователь: {userName}
           </h6>
-          <a className="d-inline-flex mb-4 text-info align-items-center b-cursor-pointer"
+          <Button variant="info" className="d-inline-flex mb-4 align-items-center"
              onClick={this.onChannelCreate}>
-            <FontAwesomeIcon icon={faPlusCircle} className="mr-1"/> Создать новый канал
-          </a>
-          <div className="b-scrollbar">
+            <FontAwesomeIcon icon={faPlusCircle} className="mr-2"/> Создать канал
+          </Button>
+          <div className="overflow-auto">
             <Channels/>
           </div>
         </Col>
-        <Col xs="8" className="d-flex flex-column b-app-height">
+        <Col xs="8" className="d-flex flex-column h-100">
           <Chat/>
         </Col>
       </Row>

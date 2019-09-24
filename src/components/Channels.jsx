@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import EntityContext from '../../EntityContext';
-import connect from '../../decorators/connect';
+import EntityContext from '../EntityContext';
+import connect from '../decorators/connect';
 
 const mapStateToProps = ({ channels, currentChannelId }) => (
   {
