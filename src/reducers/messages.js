@@ -15,4 +15,13 @@ export default handleActions({
       allIds: [...state.allIds, message.id],
     };
   },
+  [actions.removeChannelMessages](state, { payload: { id } }) {
+    const messagesToRemove = _.pickBy(state.byId, ({ channelId }) => channelId === id);
+    const idsToRemove = Object.values(messagesToRemove).map(message => message.id);
+
+    return {
+      byId: _.omit(state.byId, idsToRemove),
+      allIds: _.without(state.allIds, ...idsToRemove),
+    };
+  },
 }, { byId: {}, allIds: [] });
