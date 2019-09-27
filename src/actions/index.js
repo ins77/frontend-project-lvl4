@@ -10,9 +10,9 @@ export const removeChannelRequest = createAction('CHANNEL_REMOVE_REQUEST');
 export const removeChannelFailure = createAction('CHANNEL_REMOVE_FAILURE');
 export const removeChannelSuccess = createAction('CHANNEL_REMOVE_SUCCESS');
 export const changeChannel = createAction('CHANNEL_CHANGE');
-export const showChannelCreateModal = createAction('CHANNEL_CREATE_MODAL_SHOW');
-export const showChannelRemoveModal = createAction('CHANNEL_REMOVE_MODAL_SHOW');
-export const showChannelRenameModal = createAction('CHANNEL_RENAME_MODAL_SHOW');
+export const channelCreateModal = createAction('CHANNEL_CREATE_MODAL');
+export const channelRemoveModal = createAction('CHANNEL_REMOVE_MODAL');
+export const channelRenameModal = createAction('CHANNEL_RENAME_MODAL');
 
 export const addMessage = ({ channelId, message, userName }) => async () => {
   const url = routes.channelMessagesPath(channelId);

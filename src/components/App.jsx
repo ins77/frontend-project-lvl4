@@ -7,14 +7,14 @@ import Channels from './Channels';
 import EntityContext from '../EntityContext';
 import { connect } from '../decorators';
 
-@connect(() => ({}))
+@connect()
 class App extends Component {
   static contextType = EntityContext;
 
   onChannelCreate = () => {
-    const { showChannelCreateModal } = this.props;
+    const { channelCreateModal } = this.props;
 
-    showChannelCreateModal(true);
+    channelCreateModal({ show: true });
   }
 
   render() {

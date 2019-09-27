@@ -19,22 +19,22 @@ const channelRemovingState = handleActions({
 }, 'none');
 
 const channelCreateModal = handleActions({
-  [actions.showChannelCreateModal](state, { payload }) {
-    return payload;
+  [actions.channelCreateModal](state, { payload: { show } }) {
+    return show;
   },
 }, false);
 
 const channelRemoveModal = handleActions({
-  [actions.showChannelRemoveModal](state, { payload: { id, name, show } }) {
+  [actions.channelRemoveModal](state, { payload: { id, name, show } }) {
     return { id, name, show };
   },
-}, false);
+}, {});
 
 const channelRenameModal = handleActions({
-  [actions.showChannelRenameModal](state, { payload: { id, name, show } }) {
+  [actions.channelRenameModal](state, { payload: { id, name, show } }) {
     return { id, name, show };
   },
-}, false);
+}, {});
 
 export default combineReducers({
   channelRemovingState,

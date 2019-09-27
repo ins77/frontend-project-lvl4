@@ -5,7 +5,7 @@ import { connect, reduxForm } from '../decorators';
 import Validators from '../common/Validators';
 
 const mapStateToProps = ({ channelRenameModal, channels }) => ({
-  channelRenameModal,
+  modal: channelRenameModal,
   channels: channels.allIds.map(id => channels.byId[id]),
 });
 
@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelRenameModal, channels }) => ({
 @reduxForm('channelRenameForm')
 class ChannelRenameModal extends Component {
   onModalClose = (id, name) => () => {
-    const { showChannelRenameModal } = this.props;
+    const { channelRenameModal } = this.props;
 
-    showChannelRenameModal({ id, name, show: false });
+    channelRenameModal({ id, name, show: false });
   }
 
   onSubmit = (id, name) => async (values) => {
@@ -37,13 +37,13 @@ class ChannelRenameModal extends Component {
 
   render() {
     const {
-      channelRenameModal,
+      modal,
       handleSubmit,
       submitting,
       error,
       pristine,
     } = this.props;
-    const { id, name, show } = channelRenameModal;
+    const { id, name, show } = modal;
 
     return (
       <Modal show={show} onHide={this.onModalClose(id, name)}>

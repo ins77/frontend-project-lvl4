@@ -4,7 +4,7 @@ import { connect, reduxForm } from '../decorators';
 
 const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
   {
-    channel: channelRemoveModal,
+    modal: channelRemoveModal,
     channelRemovingState,
   }
 );
@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
 @reduxForm('channelRemoveForm')
 class ChannelRemoveModal extends Component {
   onModalClose = (id, name) => () => {
-    const { showChannelRemoveModal } = this.props;
+    const { channelRemoveModal } = this.props;
 
-    showChannelRemoveModal({ id, name, show: false });
+    channelRemoveModal({ id, name, show: false });
   }
 
   onButtonConfirmClick = (id, name) => async () => {
@@ -27,7 +27,7 @@ class ChannelRemoveModal extends Component {
   }
 
   render() {
-    const { channel: { show, id, name }, channelRemovingState } = this.props;
+    const { modal: { show, id, name }, channelRemovingState } = this.props;
     const isRemovingFailed = channelRemovingState === 'failed';
     const isRemovingRequested = channelRemovingState === 'requested';
 

@@ -24,17 +24,17 @@ class Channels extends Component {
   onChannelEdit = (id, name) => (event) => {
     event.stopPropagation();
 
-    const { showChannelRenameModal } = this.props;
+    const { channelRenameModal } = this.props;
 
-    showChannelRenameModal({ id, name, show: true });
+    channelRenameModal({ id, name, show: true });
   }
 
   onChannelRemove = ({ id, name }) => (event) => {
     event.stopPropagation();
 
-    const { showChannelRemoveModal } = this.props;
+    const { channelRemoveModal } = this.props;
 
-    showChannelRemoveModal({ id, name, show: true });
+    channelRemoveModal({ id, name, show: true });
   }
 
   render() {

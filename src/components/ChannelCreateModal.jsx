@@ -5,7 +5,7 @@ import { connect, reduxForm } from '../decorators';
 import Validators from '../common/Validators';
 
 const mapStateToProps = ({ channelCreateModal, channels }) => ({
-  show: channelCreateModal,
+  modal: channelCreateModal,
   channels: channels.allIds.map(id => channels.byId[id]),
 });
 
@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelCreateModal, channels }) => ({
 @reduxForm('channelCreateForm')
 class ChannelCreateModal extends Component {
   onModalClose = () => {
-    const { showChannelCreateModal } = this.props;
+    const { channelCreateModal } = this.props;
 
-    showChannelCreateModal(false);
+    channelCreateModal({ show: false });
   }
 
   onSubmit = async (values) => {
@@ -37,7 +37,7 @@ class ChannelCreateModal extends Component {
 
   render() {
     const {
-      show,
+      modal,
       handleSubmit,
       submitting,
       error,
@@ -45,7 +45,7 @@ class ChannelCreateModal extends Component {
     } = this.props;
 
     return (
-      <Modal show={show} onHide={this.onModalClose}>
+      <Modal show={modal} onHide={this.onModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Создание нового канала</Modal.Title>
         </Modal.Header>
