@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelCreateModal, channels }) => ({
 @reduxForm('channelCreateForm')
 class ChannelCreateModal extends Component {
   onModalClose = () => {
-    const { channelCreateModal } = this.props;
+    const { showChannelCreateModal } = this.props;
 
-    channelCreateModal({ show: false });
+    showChannelCreateModal({ show: false });
   }
 
   onSubmit = async (values) => {

@@ -12,9 +12,9 @@ class App extends Component {
   static contextType = EntityContext;
 
   onChannelCreate = () => {
-    const { channelCreateModal } = this.props;
+    const { showChannelCreateModal } = this.props;
 
-    channelCreateModal({ show: true });
+    showChannelCreateModal({ show: true });
   }
 
   render() {

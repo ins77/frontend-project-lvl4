@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelRenameModal, channels }) => ({
 @reduxForm('channelRenameForm')
 class ChannelRenameModal extends Component {
   onModalClose = (id, name) => () => {
-    const { channelRenameModal } = this.props;
+    const { showChannelRenameModal } = this.props;
 
-    channelRenameModal({ id, name, show: false });
+    showChannelRenameModal({ id, name, show: false });
   }
 
   onSubmit = (id, name) => async (values) => {

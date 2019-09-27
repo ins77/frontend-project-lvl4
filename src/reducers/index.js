@@ -19,19 +19,19 @@ const channelRemovingState = handleActions({
 }, 'none');
 
 const channelCreateModal = handleActions({
-  [actions.channelCreateModal](state, { payload: { show } }) {
+  [actions.showChannelCreateModal](state, { payload: { show } }) {
     return show;
   },
 }, false);
 
 const channelRemoveModal = handleActions({
-  [actions.channelRemoveModal](state, { payload: { id, name, show } }) {
+  [actions.showChannelRemoveModal](state, { payload: { id, name, show } }) {
     return { id, name, show };
   },
 }, {});
 
 const channelRenameModal = handleActions({
-  [actions.channelRenameModal](state, { payload: { id, name, show } }) {
+  [actions.showChannelRenameModal](state, { payload: { id, name, show } }) {
     return { id, name, show };
   },
 }, {});

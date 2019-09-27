@@ -13,9 +13,9 @@ const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
 @reduxForm('channelRemoveForm')
 class ChannelRemoveModal extends Component {
   onModalClose = (id, name) => () => {
-    const { channelRemoveModal } = this.props;
+    const { showChannelRemoveModal } = this.props;
 
-    channelRemoveModal({ id, name, show: false });
+    showChannelRemoveModal({ id, name, show: false });
   }
 
   onButtonConfirmClick = (id, name) => async () => {
