@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 import { Form, Field, SubmissionError } from 'redux-form';
 import { connect, reduxForm } from '../decorators';
 import Validators from '../common/Validators';
@@ -9,6 +10,7 @@ const mapStateToProps = ({ channelRenameModal, channels }) => ({
   channels: channels.allIds.map(id => channels.byId[id]),
 });
 
+@withTranslation()
 @connect(mapStateToProps)
 @reduxForm('channelRenameForm')
 class ChannelRenameModal extends Component {
@@ -19,10 +21,15 @@ class ChannelRenameModal extends Component {
   }
 
   onSubmit = (id, name) => async (values) => {
-    const { renameChannel, reset, channels } = this.props;
+    const {
+      renameChannel,
+      reset,
+      channels,
+      t,
+    } = this.props;
 
     if (Validators.isChannelNameValid(channels, values.name)) {
-      throw new SubmissionError({ _error: 'Такое название канала уже существует' });
+      throw new SubmissionError({ _error: t('existingChannelName') });
     }
 
     try {
@@ -42,30 +49,31 @@ class ChannelRenameModal extends Component {
       submitting,
       error,
       pristine,
+      t,
     } = this.props;
     const { id, name, show } = modal;
 
     return (
       <Modal show={show} onHide={this.onModalClose(id, name)}>
         <Modal.Header closeButton>
-          <Modal.Title>Переименование канала</Modal.Title>
+          <Modal.Title>{t('modal.rename.title')}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit(this.onSubmit(id, name))}>
           <Modal.Body>
             <label className="d-flex flex-column">
-              <div className="mb-2">Введите новое название канала &ldquo;{name}&rdquo;</div>
+              <div className="mb-2">{t('modal.rename.label')} &ldquo;{name}&rdquo;</div>
               <Field name="name" className="form-control" component="input" required/>
               {error && <div className="text-danger mt-2">{error}</div>}
             </label>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.onModalClose(id, name)}>
-              Отменить
+              {t('button.cancel')}
             </Button>
             <Button variant="primary"
                     type="submit"
                     disabled={submitting || pristine}>
-              Переименовать
+              {t('button.rename')}
             </Button>
           </Modal.Footer>
         </Form>

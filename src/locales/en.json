@@ -1,0 +1,28 @@
+{
+  "createChannel": "Create channel",
+  "userName": "User",
+  "existingChannelName": "This channel name already exists",
+  "send": "Send",
+  "button": {
+    "cancel": "Cancel",
+    "create": "Create",
+    "yes": "Yes",
+    "no": "No",
+    "rename": "Rename"
+  },
+  "modal": {
+    "create": {
+      "title": "Creating a new channel",
+      "label": "Enter the name of the new channel"
+    },
+    "remove": {
+      "title": "Remove channel",
+      "label": "Are you sure you want to delete the channel",
+      "error": "An error has occurred. Try again."
+    },
+    "rename": {
+      "title": "Rename channel",
+      "label": "Enter a new channel name for"
+    }
+  }
+}

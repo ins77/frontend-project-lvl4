@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import { Modal, Button } from 'react-bootstrap';
 import { connect, reduxForm } from '../decorators';
 
@@ -9,6 +10,7 @@ const mapStateToProps = ({ channelRemoveModal, channelRemovingState }) => (
   }
 );
 
+@withTranslation()
 @connect(mapStateToProps)
 @reduxForm('channelRemoveForm')
 class ChannelRemoveModal extends Component {
@@ -27,28 +29,28 @@ class ChannelRemoveModal extends Component {
   }
 
   render() {
-    const { modal: { show, id, name }, channelRemovingState } = this.props;
+    const { modal: { show, id, name }, channelRemovingState, t } = this.props;
     const isRemovingFailed = channelRemovingState === 'failed';
     const isRemovingRequested = channelRemovingState === 'requested';
 
     return (
       <Modal show={show} onHide={this.onModalClose(id, name)}>
         <Modal.Header closeButton>
-          <Modal.Title>Удаление канала</Modal.Title>
+          <Modal.Title>{t('modal.remove.title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Вы точно хотите удалить канал &ldquo;{name}&rdquo;?
-          {isRemovingFailed && <div className="text-alert mt-2">Произошла ошибка. Попробуйте еще раз.</div>}
+          {t('modal.remove.label')} &ldquo;{name}&rdquo;?
+          {isRemovingFailed && <div className="text-alert mt-2">{t('modal.remove.error')}</div>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.onModalClose(id, name)}>
-            Нет
+            {t('button.no')}
           </Button>
           <Button variant="primary"
                   onClick={this.onButtonConfirmClick(id, name)}
                   type="submit"
                   disabled={isRemovingRequested}>
-            Да
+            {t('button.yes')}
           </Button>
         </Modal.Footer>
       </Modal>

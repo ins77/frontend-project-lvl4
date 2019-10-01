@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Field, SubmissionError } from 'redux-form';
+import { withTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 import { connect, reduxForm } from '../decorators';
 import EntityContext from '../EntityContext';
 
 const mapStateToProps = ({ currentChannelId }) => ({ currentChannelId });
 
+@withTranslation()
 @connect(mapStateToProps)
 @reduxForm('sendMessage')
 class MessageForm extends Component {
@@ -35,6 +37,7 @@ class MessageForm extends Component {
       pristine,
       submitting,
       error,
+      t,
     } = this.props;
 
     return (
@@ -42,7 +45,7 @@ class MessageForm extends Component {
         {error && <div className="text-danger mb-2">{error}</div>}
         <Form className="d-flex" onSubmit={handleSubmit(this.onSubmit)}>
           <Field name="message" component="textarea" className="form-control" style={{ resize: 'none' }}/>
-          <Button variant="primary" className="ml-2" type="submit" disabled={submitting || pristine}>Отправить</Button>
+          <Button variant="primary" className="ml-2" type="submit" disabled={submitting || pristine}>{t('send')}</Button>
         </Form>
       </>
     );
